@@ -1,0 +1,94 @@
+conky.config = {
+    own_window = true,
+    own_window_transparent = true,
+    own_window_type =  'desktop',
+    background = true,
+    use_xft = true,
+    xftalpha = 0.5,
+    update_interval = 1.0,
+    total_run_times = 0,
+    double_buffer = true,
+    draw_shades = true,
+    draw_outline = true,
+    draw_borders = false,
+    draw_graph_borders = true,
+    minimum_size  = 200,
+    minimum_height = 690,
+    maximum_width = 200,
+    border_width = 0,
+    default_color = 'white',
+    default_shade_color = 'black',
+    default_outline_color ='black',
+    font = 'DejaVu Sans Mono:size=9',
+    alignment =  'top_right',
+    gap_x = 5,
+    gap_y = 0,
+    no_buffers = true,
+    cpu_avg_samples = 2,
+    override_utf8_locale = true,
+    use_spacer =  'right'
+
+
+}
+conky.text = [[
+${scroll 12 $nodename - $sysname $kernel on $machine | }
+$hr
+${color white}Informacion del Sistema:
+${color white}Uptime:$color $uptime
+${color white}Frequencia (en MHz):$color $freq
+${color white}CPU Usado:$color $cpu% ${cpubar 4}
+${color white}Procesos:$color $processes  ${color white}Corriendo:$color $running_processes
+$hr
+${font Droid Sans:style=Bold:size=6}FECHA Y HORA
+${font Droid Sans:size=10}${alignc}${time %H:%M}${font}
+${alignc}${time %d %B %Y}
+${voffset 6}${font Droid Sans:style=Bold:size=6}CPU${font}${offset -20}${voffset 10}${cpubar cpu0 4,18}
+${voffset -23}${goto 40}Core 1: ${font Droid Sans:style=Bold:size=8}${cpu cpu1}%${font} ${alignr}${cpubar cpu1 7,70 EEEEEE}
+${voffset 1}${goto 40}Core 2: ${font Droid Sans:style=Bold:size=8}${cpu cpu2}%${font} ${alignr}${cpubar cpu2 7,70 EEEEEE}
+${voffset 1}${goto 40}Core 3: ${font Droid Sans:style=Bold:size=8}${cpu cpu3}%${font} ${alignr}${cpubar cpu3 7,70 EEEEEE}
+${voffset 1}${goto 40}Core 4: ${font Droid Sans:style=Bold:size=8}${cpu cpu4}%${font} ${alignr}${cpubar cpu4 7,70 EEEEEE}
+# |--MEM
+${voffset 6}${font Droid Sans:style=Bold:size=8}RAM${font}${goto 40}RAM: ${font Droid Sans:style=Bold:size=8}$memperc%${font}
+${voffset 6}${offset 1}${voffset -8}${membar 4,18}${voffset 4}${goto 40}${voffset -2}Libre: ${font Droid Sans:style=Bold:size=8}${memeasyfree}${font} ${goto 110}   Usada: ${font Droid Sans:style=Bold:size=8}${mem}${font}
+#|--SWAP
+#${voffset 5}${font Droid Sans:style=Bold:size=8}SWP${font}${goto 40}Swap: ${font Droid Sans:style=Bold:size=8}${swapperc}%${font}
+#${voffset 4}${offset 1}${voffset -7}${swapbar 4,18}${voffset 4}${goto 40}Libre: ${font Droid Sans:style=Bold:size=8}$swapmax${font} ${goto 110}   Usada: ${font Droid Sans:style=Bold:size=8}$swap${font}
+
+# |--PROC
+${color white}Procesos:
+${color white}Name              PID   CPU%   MEM%
+${color white}${top_mem name 1} ${top_mem pid 1} ${top_mem cpu 1} ${top_mem mem 1}
+${color lightgrey}${top_mem name 2} ${top_mem pid 2} ${top_mem cpu 2} ${top_mem mem 2}
+${color lightgrey}${top_mem name 3} ${top_mem pid 3} ${top_mem cpu 3} ${top_mem mem 3}
+${color lightgrey}${top_mem name 4} ${top_mem pid 4} ${top_mem cpu 4} ${top_mem mem 4}
+${color lightgrey}${top_mem name 5} ${top_mem pid 5} ${top_mem cpu 5} ${top_mem mem 5}
+${color lightgrey}${top_mem name 6} ${top_mem pid 6} ${top_mem cpu 6} ${top_mem mem 6}
+${color lightgrey}${top_mem name 7} ${top_mem pid 7} ${top_mem cpu 7} ${top_mem mem 7}
+${color lightgrey}${top_mem name 8} ${top_mem pid 8} ${top_mem cpu 8} ${top_mem mem 8}
+${color lightgrey}${top_mem name 9} ${top_mem pid 9} ${top_mem cpu 9} ${top_mem mem 9}
+${color lightgrey}${top_mem name 10} ${top_mem pid 10} ${top_mem cpu 10} ${top_mem mem 10}
+# - HD - #
+##########
+${voffset 4}${font Droid Sans:style=Bold:size=6}HD $hr
+# |--HD default
+${voffset 4}${goto 20}Root: ${font Droid Sans:style=Bold:size=6}${fs_used_perc /}%${font}${goto 100}${alignr}${fs_bar 6,68 /}
+${voffset 7}Libre: ${font Droid Sans:style=Bold:size=6}${fs_free /}${font} ${alignr 1}Usado: ${font Droid Sans:style=Bold:size=8}${fs_used /}${font}
+${voffset 4}${goto 20}Home: ${font Droid Sans:style=Bold:size=6}${fs_used_perc /home}%${font}${goto 100}${alignr}${fs_bar 6,68 /home}
+ ${offset 7}Libre: ${font Droid Sans:style=Bold:size=6}${fs_free /home}${font} ${alignr 1}Usado: ${font Droid Sans:style=Bold:size=8}${fs_used /home}${font}
+# |--HDTEMP1
+${voffset 4}${goto 20}Temperatura: ${font Droid Sans:style=Bold:size=6}${execi 120 sudo hddtemp /dev/sda -n --unit=C}?C${font}${alignr}/dev/sda
+$hr
+${color white}Red:
+Connections: ${color grey}${tcp_portmon 1 65535 count}
+Active Interface ${alignr}$gw_iface
+IP ${alignr}${addr wlp5s0}
+Gateway IP ${alignr}$gw_ip
+DNS ${alignr}$nameserver
+TOR Status ${alignr}${if_running tor} Active${else}Disabled${endif}
+Upload speed:${alignr}${upspeed wlp5s0}kb/s
+Download speed:${alignr}${downspeed wlp5s0}kb/s
+
+
+
+}
+]] 
