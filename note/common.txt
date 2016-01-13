@@ -1,0 +1,192 @@
+SSH:
+SSH登陆：ssh -YA linjc@168.168.0.13
+SSHFS挂载：sshfs -o allow_other linjc@168.168.0.13:/home/linjc/ ~/ljc
+
+git:
+git clone git@168.168.0.253:rk3188/tvbox-v442/jb.git tvbox-v442  //获取服务器源码
+git push rk master:tchip_rk3188 //本地分支推上服务器
+git fetch rk tchip_lc_beex:tchip_lc_beex  //获取远程分支
+git branch -m e5 temp  //重命名分支
+git branch -d temp  //删除分支
+git cherry-pick b745777  //挑拣
+git pull origin master  //将远程服务器上的master分支合并到当前分支中
+git push origin :temp   //删除远程分支
+git diff master HEAD kernel/drivers/input/remotectl/rkxx_remotectl.c    //比较master分支和当前分支rkxx_remotectl.c文件的区别
+
+git暂存：
+git add .
+git stash save "temp" //把修改暂存
+git stash list //打印暂存列表
+git stash pop stash@{0} //把暂存stash@{0}取出
+
+patch:
+git format-patch HEAD^ <==最近的1次commit的patch
+git format-patch HEAD^^ <==最近的2次commit的patch
+git format-patch -M master  // 当前分支所有超前master的提交
+
+修改仓库路径：
+git remote rm origin //删除仓库路径
+git remote add origin git@168.168.0.253:rk3288/tvbox-442.git//添加仓库路径
+git remote set-url origin firefly@168.168.0.13:project/rockchip/3288/src/firefly-44/kitchen/.git//修改仓库路径
+
+git tag:
+git tag Firefly-RK3288_Android4.4_201412261234 //打标签
+git push origin --tags //把标签推上服务器
+git show Firefly-RK3288_Android4.4_201412261234 //查看标签信息
+git tag -l //查看标签列表
+git tag -d Firefly-RK3288_Android4.4_201412261234 //删除本地tag
+git push origin :refs/tags/Firefly-RK3288_Android4.4_201412261234 //删除远程tag
+git tag Firefly-RK3288_Android4.4_201412261234 ae468d8kt //为某次提交创建标签
+git archive --output=test.tar 3e4eeb4 $(git diff --name-only 3e4eeb4^..3e4eeb4) //打包提交3e4eeb4上修改的文件
+git archive --output=test_old.tar 3e4eeb4^ $(git diff --name-only 3e4eeb4^..3e4eeb4) //打包提交3e4eeb4修改前的文件
+
+Android编译：
+编译生成完整固件：
+source build/envsetup.sh
+lunch tr7088-eng
+make installclean && make -j8 && ./mkimage.sh ota && ./TCTools/rarimg.sh
+生成OTA升级包：
+make -j8 && ./mkimage.sh ota && make  otapackage -j8
+
+adb
+adb重启：
+sudo -s
+adb kill-server
+adb start-server
+adb网络调试：
+adb kill-server
+adb connect 168.168.100.57 //连接到网络设备
+adb shell //启用adb shell
+adb install ~/下载/AnTuTuBenchmark_4040300.apk //用adb 安装软件
+
+常用路径：
+TP参数：drivers/input/touchscreen/ICN850X/
+开机logo：drivers/video/logo/
+摄像头参数：arch/arm/mach-rk3188/tchip_camera_setup_tr7088.h
+
+
+关闭触摸板：
+synclient touchpadoff=1
+开启触摸板：
+synclient touchpadoff=0
+
+模块编译：
+1.mmm 
+2.(cd frameworks/base/packages/SystemUI/src/com/android/systemui/ ; mm)
+
+备份内核配置：
+make savedefconfig
+
+patch:
+生成补丁：
+git format-patch –n 07fe //--n指patch数，07fe对应提交的名称
+git diff > my.patch  ----> patch -p1 < my.patch
+git diff --no-prefix > my.patch  ----> patch -p0 < my.patch
+打补丁
+patch -p1 < 0007-Android-remotectl.patch //打补丁
+
+打包SDK：
+git archive --format=tar --prefix=Android-rk3066-tchip/ HEAD | gzip > Android-rk3066-tchip.tar.gz
+打包kernel:
+git archive --format=tar HEAD kernel | gzip > firefly-kernel.tar.gz
+
+git archive --format=tar HEAD | gzip > ubuntu-factory-fenghuolun.tar.gz
+
+repo init --repo-url=ssh://git@168.168.0.253/mediaTek/repo.git -u ssh://git@168.168.0.253/kitkat/rk/platform/manifest -b tchip -m tchip_rk3188_kitkat.xml
+
+查看DDR频率
+cat proc/clocks | busybox grep ddr
+
+查看cpu DDR频率
+cat /sys/dvfs/dvfs_tree && cat /proc/kmsg &
+cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq
+
+ubuntu:设置ip: sudo ifconfig eth0 168.168.2.12 netmask 255.255.0.0
+ubuntu:设置网关: sudo route add default gw 168.168.0.1
+
+adb 截图: screencap -p sdcard/DCIM/1.png
+
+格式化sd卡：mkfs.ext3 /dev/sdb1
+
+网络adb:PRODUCT_PROPERTY_OVERRIDES += service.adb.tcp.port=5555
+
+iperf:
+iperf -s //将iperf启动为server模式
+iperf -c 168.168.2.12 //将iperf启动为client模式，使用默认配置进行测试
+iperf -c 192.168.1.1 -i 2 -t 60
+
+7z x file //7z解压
+7z a targetfile.7z file //7z压缩
+
+adb shell "echo $(printf "%x" 16) > /sdcard/tmp/aa" //用主机端的echo向android结点写16进制字符
+
+screencap -p /sdcard/screenshot.png //android截屏
+
+:1,$s/ugoos/firefly/g //vim中把文档中的ugoos替换为firefly
+
+//repo 获取3128SDK
+git clone ssh://git@168.168.0.253/Lollipop/rk/tools/repo.git
+./repo/repo init --repo-url ssh://git@168.168.0.253/Lollipop/rk/tools/repo.git -u ssh://git@168.168.0.253/Lollipop/rk/platform/manifest.git -b android-5.0 -m rk312x_lollipop_release.xml
+rm ./repo/ -rf
+.repo/repo/repo sync
+repo start master --all
+
+android数据库:
+/data/data/com.android.providers.settings/databases
+
+按键默认值:
+device/rockchip/rksdk/overlay/frameworks/base/core/res/res/values/config.xml
+
+修改按键
+frameworks/base/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
+
+广播
+am broadcast -a 
+
+android sql操作指令:
+.database 显示数据库信息
+.tables 显示表名称
+insert into table_name values (field1, field2, field3...); 插入记录
+select * from table_name;查看table_name表中所有记录；
+.quit 退出命令行接口
+
+挂载:
+busybox mount -o remount,rw /system
+
+android默认设置
+frameworks/base/packages/SettingsProvider/res/values/defaults.xml
+
+copy linux file system
+通过网络，在主机上运行：
+rsync -axv --delete root@开发板IP:/ /path/to/fireprime/
+
+软件签名：
+java -jar signapk.jar platform.x509.pem platform.pk8 app-debug.apk appsigned.apk
+
+shell脚本常用符号:
+$# 引用变量的数量
+
+自动获取ip
+sudo dhclient eth0
+
+virtualbox菜单栏不见了：HOST+L
+
+修改ubuntu分辨率：
+etc/X11/xorg.conf
+Section "Screen"
+    Identifier "Default Screen"
+    DefaultDepth 24
+SubSection "Display"
+    Depth 24
+    Modes "320x240"
+EndSubSection
+# If 24 bits color depth is used, also turn on fbset by:
+#   $ sudo systemctl enable fbset
+# then reboot 
+EndSection
+
+从另一个服务器拉取到本地作为一个新分支:
+git pull ruanjg@168.168.0.11:~/jppro/rk3288/custom/tvbox-442/.git master:temp
+
+nmcli使用：
+nmcli dev wifi connect "tchip-A" password tchip2101 name test
