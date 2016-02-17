@@ -1,7 +1,8 @@
-obj-m+=char.o
+obj-m :=char.o
+
+KDIR := /home/linjc/raspberrypi/linux-rpi
 
 all:
-	make -C /lib/modules/$(shell uname -r)/build/ M=$(PWD) modules
-	$(CC) char.c -o test
+	make -C $(KDIR) M=$(PWD) modules ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf-
 clean:
-	make -C /lib/modules/$(shell uname -r)/build/ M=$(PWD) clean
+	rm -f *.ko *.o *.mod.o *.mod.c *.symvers  modul*
