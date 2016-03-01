@@ -190,3 +190,13 @@ git pull ruanjg@168.168.0.11:~/jppro/rk3288/custom/tvbox-442/.git master:temp
 
 nmcli使用：
 nmcli dev wifi connect "tchip-A" password tchip2101 name test
+
+设置archlinux hostname:
+hostnamectl set-hostname myhostname
+
+安装jdk7
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt-get install oracle-java7-installer
+当前jdk版本配置
+sudo update-alternatives --config java
