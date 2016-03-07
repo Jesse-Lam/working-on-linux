@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/home1/linjc/rk3288/tvbox-442-3/kernel/drivers/media/video/rk_camsys'
+let g:netrw_dirhist_2='/home1/liangkd/work/tmp_work/fan'
+let g:netrw_dirhist_3='/home1/linjc/linux/miniroot/initramfs'
+let g:netrw_dirhist_4='/home1/linjc/rk3288/tvbox-51/packages/apps/src/res'
+let g:netrw_dirhist_5='/home1/linjc/rk3288/tvbox-51/packages/apps/src/res/values'
+let g:netrw_dirhist_6='/home1/linjc/rk3288/hdmiinapk_src'
+let g:netrw_dirhist_7='/home1/linjc/rk3288/tvbox-51/kernel/drivers'
