@@ -1,0 +1,4 @@
+1.sudo yum groupinstall "Chinese Support"
+2.change the file /etc/sysconfig/i18n
+LANG="zh_CN.UTF-8"
+3.source the file: source /etc/sysconfig/i18n
