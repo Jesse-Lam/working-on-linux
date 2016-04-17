@@ -1,0 +1,11 @@
+$ git push origin master:master
+error: The requested URL returned error: 403 Forbidden while accessing https://github.com/linjc/linux.git/info/refs
+
+fatal: HTTP request failed
+
+resolve:
+vim .git/config
+change:
+url = https://github.com/linjc/linux.git
+to
+url = https://linjc@github.com/linjc/linux.git
