@@ -1,12 +1,12 @@
 # i3使用
 
-##安装
-Debian,ubuntu:
-`sudo apt-get install i3`
-如果电脑本身已经安装了图形化桌面(如gnome),安装完i3之后在启动界面可以选择i3，即可启动i3.
+## 安装
+Debian,ubuntu:<br />
+`sudo apt-get install i3`<br />
+如果电脑本身已经安装了图形化桌面(如gnome),安装完i3之后在启动界面可以选择i3，即可启动i3.<br />
 第一次启动会让你选择Mod键，选完之后后面经常要用到这个键
 
-##常用快捷键
+## 常用快捷键
 ```
 Mod d               运行程序，调用 dmenu
 Mod Enter           创建一个新终端
@@ -25,22 +25,22 @@ Mod Shift e         退出i3
 Mod Shift Space     切换浮动/非浮动
 ```
 
-##配置相关
+## 配置相关
 i3桌面管理器默认没有声音及网络管理插件，这里可以手动安装
 
-* 声音控制插件:
-`sudo apt-get install volumeicon-alsa pulseaudio pavucontrol`
-然后在.i3/config 最后添加：
-`exec --no-startup-id volumeicon`
+* 声音控制插件:<br />
+`sudo apt-get install volumeicon-alsa pulseaudio pavucontrol`<br />
+然后在.i3/config 最后添加：<br />
+`exec --no-startup-id volumeicon`<br />
 
-* 网络管理插件:
-`sudo apt-get install network-manager-gnome`
-然后在.i3/config 最后添加：
-`exec --no-startup-id nm-applet`
+* 网络管理插件:<br />
+`sudo apt-get install network-manager-gnome`<br />
+然后在.i3/config 最后添加：<br />
+`exec --no-startup-id nm-applet`<br />
 
-* 添加桌面壁纸：
-`sudo apt-get install feh`
-然后选择一张壁纸，如：/home/linjc/Pictures/Cool-Wallpaper-Background-HD-Dekstop.jpg 然后在.i3/config 最后添加：
+* 添加桌面壁纸：<br />
+`sudo apt-get install feh`<br />
+然后选择一张壁纸，如：/home/linjc/Pictures/Cool-Wallpaper-Background-HD-Dekstop.jpg 然后在.i3/config 最后添加：<br />
 `exec --no-startup-id feh --bg-scale /home/linjc/Pictures/Cool-Wallpaper-Background-HD-Dekstop.jpg`
 
-##相关推荐
+## 相关推荐
