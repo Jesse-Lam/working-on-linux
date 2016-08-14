@@ -157,6 +157,10 @@ bar {
         status_command i3status
 }
 
+# pulse audio volume control
+bindsym XF86MonBrightnessUp exec /usr/bin/xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec /usr/bin/xbacklight -dec 5
+
 #my defualt
 assign [class="(?i)google"] $workspace2
 bindsym $mod+Shift+x exec i3lock

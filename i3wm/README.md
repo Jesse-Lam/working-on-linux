@@ -115,6 +115,11 @@ bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
 ```
 
+* 亮度调节：<br />
+在.i3/config 中添加：<br />
+`bindsym XF86MonBrightnessUp exec /usr/bin/xbacklight -inc 10` <br />
+`bindsym XF86MonBrightnessDown exec /usr/bin/xbacklight -dec 5` <br />
+
 ## 相关推荐
 * 文件管理器：ranger <br />
 * 文件管理器：gentoo <br />
