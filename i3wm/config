@@ -158,16 +158,30 @@ bar {
 }
 
 # pulse audio volume control
+bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume 0 -- '-5%'
+bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume 0 -- '+5%'
+bindsym XF86AudioMute exec /usr/bin/pactl set-sink-volume 0 0
+bindsym XF86Launch1 exec /usr/bin/pactl play-sample that_was_easy
+
+# backlight control
 bindsym XF86MonBrightnessUp exec /usr/bin/xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec /usr/bin/xbacklight -dec 5
 
-#my defualt
+# default the layout is tabbed
+workspace_layout tabbed
+
+# my defualt
 assign [class="(?i)google"] $workspace2
 bindsym $mod+Shift+x exec i3lock
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
 
-#Autostart
+# Autostart
+# auto lock screen
+exec --no-startup-id xset dpms 600
+# sounds control
 exec --no-startup-id volumeicon
+# network manage
 exec --no-startup-id nm-applet
+# wallpaper
 exec --no-startup-id feh --bg-scale /home/linjc/Pictures/Cool-Wallpaper-Background-HD-Dekstop.jpg

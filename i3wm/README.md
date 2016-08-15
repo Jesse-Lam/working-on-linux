@@ -120,6 +120,20 @@ bindsym $mod+Shift+Tab workspace prev
 `bindsym XF86MonBrightnessUp exec /usr/bin/xbacklight -inc 10` <br />
 `bindsym XF86MonBrightnessDown exec /usr/bin/xbacklight -dec 5` <br />
 
+* 声音调节：<br />
+在.i3/config 中添加：<br />
+```
+bindsym XF86AudioLowerVolume exec /usr/bin/pactl set-sink-volume 0 -- '-5%'
+bindsym XF86AudioRaiseVolume exec /usr/bin/pactl set-sink-volume 0 -- '+5%'
+bindsym XF86AudioMute exec /usr/bin/pactl set-sink-volume 0 0
+bindsym XF86Launch1 exec /usr/bin/pactl play-sample that_was_easy
+```
+
+* 默认使用标签模式：<br />
+在.i3/config 中添加：<br />
+`workspace_layout tabbed` <br />
+
+
 ## 相关推荐
 * 文件管理器：ranger <br />
 * 文件管理器：gentoo <br />
