@@ -152,3 +152,15 @@ gnome-tweak-tool 系统优化
 nautilus 文件管理器
 totem 多媒体播放器
 ```
+
+## 其他问题
+i3-wm默认不能自动挂载u盘
+要自动挂载u盘，可以在系统中添加此文件：
+```
+/etc/udev/rules.d/10-my-udev.rules
+ACTION=="add",KERNEL=="sd[a-d][0-9]|mmcblk[0-9]p[0-9]",RUN+="/bin/mkdir -p /media/%k"                                           
+ACTION=="add",KERNEL=="sd[a-d][0-9]|mmcblk[0-9]p[0-9]",RUN+="/bin/mount /dev/%k /media/%k"
+ACTION=="remove",KERNEL=="sd[a-d][0-9]|mmcblk[0-9]p[0-9]",RUN+="/bin/umount /media/%k"
+ACTION=="remove",KERNEL=="sd[a-d][0-9]|mmcblk[0-9]p[0-9]",RUN+="/bin/rmdir  /media/%k"
+```
+添加之后重启系统，插u盘可以自动挂载在/media/，拔掉u盘后自动卸载。
